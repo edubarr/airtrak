@@ -9,11 +9,14 @@ import (
 
 	"connectrpc.com/connect"
 	"github.com/edubarr/airtrak/backend/gen/airtrak/auth/v1/authv1connect"
+	"github.com/edubarr/airtrak/backend/gen/airtrak/health/v1/healthv1connect"
 	"github.com/edubarr/airtrak/backend/internal/api"
 	"github.com/edubarr/airtrak/backend/internal/auth"
 	"github.com/edubarr/airtrak/backend/internal/config"
 	"github.com/edubarr/airtrak/backend/internal/db"
 	"github.com/edubarr/airtrak/backend/internal/store"
+	"golang.org/x/net/http2"
+	"golang.org/x/net/http2/h2c"
 )
 
 func main() {
@@ -51,28 +54,16 @@ func run(logger *slog.Logger) error {
 
 	mux := http.NewServeMux()
 	interceptors := connect.WithInterceptors(api.AuthInterceptor(authService))
+
 	authPath, authHandler := authv1connect.NewAuthServiceHandler(api.NewAuthHandler(authService), interceptors)
 	mux.Handle(authPath, authHandler)
-	mux.HandleFunc("/healthz", func(w http.ResponseWriter, _ *http.Request) {
-		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte("ok\n"))
-	})
-	mux.HandleFunc("/readyz", func(w http.ResponseWriter, r *http.Request) {
-		ctx, cancel := context.WithTimeout(r.Context(), 2*time.Second)
-		defer cancel()
 
-		if err := pool.Ping(ctx); err != nil {
-			http.Error(w, "database unavailable", http.StatusServiceUnavailable)
-			return
-		}
-
-		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte("ready\n"))
-	})
+	healthPath, healthHandler := healthv1connect.NewHealthServiceHandler(api.NewHealthHandler(pool))
+	mux.Handle(healthPath, healthHandler)
 
 	server := &http.Server{
 		Addr:              cfg.APIAddr,
-		Handler:           mux,
+		Handler:           h2c.NewHandler(mux, &http2.Server{}),
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 

@@ -1345,9 +1345,9 @@ registrations_created_total
 ### 20.3 Health checks
 
 ```text
-GET /healthz   process is alive
-GET /readyz    database reachable and service ready
-GET /metrics   Prometheus metrics if enabled
+POST /airtrak.health.v1.HealthService/Healthz   process is alive
+POST /airtrak.health.v1.HealthService/Readyz    database reachable and service ready
+GET /metrics                                      Prometheus metrics if enabled
 ```
 
 ---

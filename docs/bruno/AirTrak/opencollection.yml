@@ -2,6 +2,23 @@ opencollection: 1.0.0
 
 info:
   name: AirTrak
+config:
+  protobuf:
+    protoFiles:
+      - type: file
+        path: ../../../backend/proto/airtrak/auth/v1/auth.proto
+      - type: file
+        path: ../../../backend/proto/airtrak/health/v1/health.proto
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
 bundled: false
 extensions:
   bruno:

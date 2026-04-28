@@ -1,0 +1,12 @@
+info:
+  name: Readyz
+  type: grpc
+  seq: 2
+
+grpc:
+  url: "{{baseGrpcUrl}}"
+  method: /airtrak.health.v1.HealthService/Readyz
+  methodType: unary
+  protoFilePath: ../../../backend/proto/airtrak/health/v1/health.proto
+  message: "{}"
+  auth: inherit

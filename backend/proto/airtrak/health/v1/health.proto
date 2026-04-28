@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package airtrak.health.v1;
+
+service HealthService {
+  rpc Healthz(HealthzRequest) returns (HealthzResponse) {}
+  rpc Readyz(ReadyzRequest) returns (ReadyzResponse) {}
+}
+
+message HealthzRequest {}
+
+message HealthzResponse {
+  string status = 1;
+}
+
+message ReadyzRequest {}
+
+message ReadyzResponse {
+  string status = 1;
+}

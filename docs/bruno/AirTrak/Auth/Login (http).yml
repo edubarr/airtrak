@@ -1,0 +1,33 @@
+info:
+  name: Login (http)
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/airtrak.auth.v1.AuthService/Login"
+  body:
+    type: json
+    data: |-
+      {
+        "email": "player@example.com",
+        "password": "12345678"
+      }
+  auth: inherit
+
+runtime:
+  actions:
+    - type: set-variable
+      phase: after-response
+      selector:
+        expression: res.body.accessToken
+        method: jsonq
+      variable:
+        name: accessToken
+        scope: runtime
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

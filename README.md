@@ -32,7 +32,7 @@ Implemented so far:
 - sqlc-generated pgx query layer under `backend/internal/store/`.
 - Auth service with register, login, JWT authentication, session validation, and logout.
 - User credential model that supports `email_password` now and `whatsapp_jid` later.
-- API server with Connect `AuthService`, `/healthz`, and `/readyz`.
+- API server with Connect `AuthService` and `HealthService`.
 - Goose migration runner under `backend/cmd/migrate`.
 - Fast unit tests and optional PostgreSQL integration tests.
 

@@ -1,0 +1,14 @@
+info:
+  name: GetMe
+  type: grpc
+  seq: 3
+
+grpc:
+  url: "{{baseGrpcUrl}}"
+  method: /airtrak.auth.v1.AuthService/GetMe
+  methodType: unary
+  protoFilePath: ../../../backend/proto/airtrak/auth/v1/auth.proto
+  message: "{}"
+  auth:
+    type: bearer
+    token: "{{accessToken}}"

@@ -19,6 +19,7 @@ This checklist reflects the repository state today. The broader MVP plan is in `
 ## Users And Auth
 
 - [x] Auth Protobuf service with `Register`, `Login`, `GetMe`, and `Logout`.
+- [x] Health Protobuf service with `Healthz` and `Readyz`.
 - [x] Connect RPC handlers for auth routes.
 - [x] Email/password registration with bcrypt password hashes.
 - [x] Email/password login.
@@ -108,8 +109,8 @@ This checklist reflects the repository state today. The broader MVP plan is in `
 - [x] `POST /airtrak.auth.v1.AuthService/Login`.
 - [x] `POST /airtrak.auth.v1.AuthService/GetMe`.
 - [x] `POST /airtrak.auth.v1.AuthService/Logout`.
-- [x] `GET /healthz`.
-- [x] `GET /readyz`.
+- [x] `POST /airtrak.health.v1.HealthService/Healthz`.
+- [x] `POST /airtrak.health.v1.HealthService/Readyz`.
 - [x] Bruno collection files for currently available routes under `docs/bruno/AirTrak`.
 - [ ] API tests using generated Connect clients.
 - [ ] Bruno requests for future group, field, game, registration, and bot operations.

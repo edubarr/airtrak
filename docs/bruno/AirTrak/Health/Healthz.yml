@@ -1,0 +1,12 @@
+info:
+  name: Healthz
+  type: grpc
+  seq: 1
+
+grpc:
+  url: "{{baseGrpcUrl}}"
+  method: /airtrak.health.v1.HealthService/Healthz
+  methodType: unary
+  protoFilePath: ../../../backend/proto/airtrak/health/v1/health.proto
+  message: "{}"
+  auth: inherit

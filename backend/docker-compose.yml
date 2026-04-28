@@ -18,7 +18,7 @@ services:
       - POSTGRES_PASSWORD=airtrak
       - POSTGRES_DB=airtrak
     volumes:
-      - postgres_app_data:/var/lib/postgresql/data
+      - postgres_app_data:/var/lib/postgresql
 
 volumes:
   postgres_app_data:
