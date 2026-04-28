@@ -2,7 +2,7 @@
 
 ## Scope
 - The active codebase is the Go backend in `backend/`; run Go, Buf, sqlc, Goose, and lint commands from that directory.
-- `README.md` describes the current implementation stage; `airtrak_initial_plan.md` is the broader plan, not all implemented behavior.
+- `README.md` describes the project; `docs/current_stage.md` tracks implementation status; `docs/airtrak_initial_plan.md` is the broader plan, not all implemented behavior.
 - Current real entrypoints are `backend/cmd/server` for the API and `backend/cmd/migrate` for Goose migrations.
 
 ## Architecture

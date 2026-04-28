@@ -129,4 +129,4 @@ golangci-lint run
 7. Add outbox worker support for reliable WhatsApp replies.
 8. Add LLM parser abstraction after deterministic command flows are working.
 
-See `airtrak_initial_plan.md` for the full MVP architecture and phased implementation plan.
+See `docs/airtrak_initial_plan.md` for the full MVP architecture and `docs/current_stage.md` for the current implementation checklist.
