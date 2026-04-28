@@ -1,0 +1,37 @@
+# Lefthook configuration
+# https://github.com/evilmartians/lefthook
+
+pre-commit:
+  commands:
+    buf-lint:
+      priority: 1
+      glob: "*.proto"
+      root: "proto/"
+      run: buf lint proto
+
+    proto-generate:
+      priority: 2
+      glob: "*.proto"
+      root: "proto/"
+      run: buf generate proto && git add gen/
+      stage_fixed: true
+
+    go-fmt:
+      priority: 3
+      glob: "*.go"
+      run: gofmt -w {staged_files} && git add {staged_files}
+      stage_fixed: true
+
+    go-build:
+      priority: 4
+      run: go build ./...
+
+    golangci-lint:
+      priority: 4
+      glob: "*.go"
+      run: golangci-lint run
+
+pre-push:
+  commands:
+    go-test:
+      run: go test ./...

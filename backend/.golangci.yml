@@ -1,0 +1,29 @@
+version: "2"
+
+run:
+  timeout: 5m
+
+linters:
+  enable:
+    - gocritic       # Opinionated linter
+    - misspell       # Spell checker
+    - unconvert      # Remove unnecessary conversions
+    - unparam        # Find unused parameters
+    - errorlint      # Error handling best practices
+    - lll            # Line length linter
+    - wsl_v5         # Linter for Windows Subsystem for Linux
+  exclusions:
+    paths:
+      - gen          # Exclude generated protobuf code
+      - internal/store # Exclude generated sqlc code
+  settings:
+    govet:
+      enable-all: true
+    gocritic:
+      enable-all: true
+formatters:
+  enable:
+    - gofumpt       # Enforce gofumpt formatting
+  settings:
+    gofumpt:
+      extra-rules: true
